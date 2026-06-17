@@ -1,47 +1,249 @@
-# Full Stack Test
-WPoets Full Stack Developer Test
+# WPoets Full Stack Developer Assignment
 
-Hi Full-stacker!
+## Overview
 
-Great that you're interested in this exercise! Thanks a lot for making it. The exercise consits of an assignment. It is related to the WPoets working ways. Good luck and we are looking forward to hearing from you soon!
+This project is a Full Stack PHP application developed as part of the WPoets Full Stack Developer assessment.
 
-To complete these assignment you need to fork this repo. When you're done you can push your changes to your own repo (and let us know where to find it ofcourse).
+The application provides:
 
-<h2>Task</h2>
-<ul>
-  <li>Create a CRUD functionality using PHP, MySQL.</li>
-	<li>Fetch the data to display the section that matches the given design using HTML5, CSS3, jQuery, Bootstrap.</li>
-</ul>
+* Category Management (CRUD)
+* Slide Management (CRUD)
+* Dynamic Tab/Accordion Interface
+* Responsive Design
+* Synchronized Content and Image Slider
+* MySQL Database Integration
+* PHP OOP Architecture using PDO
 
-<h2>Design</h2>
+---
 
-<h5>In Web view</h5>
-<ul>
-  <li>Column 1 is tabs. Each tab is a seperate slider.</li>
-	<li>Clicking on the tab will change the slider in Column 2.</li>
-	<li>
-		Column 2 is a slider connected with column 3.
-		<ul>
-			<li>Which means when the slide in column 2 changes, the image in column 3 will change with it.</li>
-			<li>Controls are attached to column 2 only.</li>
-		</ul>
-	</li>
-	<li>Image in column 3 is a 1:1 image.</li>
-</ul>
+## Technologies Used
 
-<h5>In Mobile view</h5>
-<ul>
-  <li>Column 1 changes to accordion.</li>
-  <li>Column 2 is a slider with images from column 3 as background images.</li>
-</ul>
+### Backend
 
-<strong>Note: Please refer to the files directory for design files, relevant icons/images and styleguide.</strong>
+* PHP 8+
+* MySQL
+* PDO (Prepared Statements)
+* Object-Oriented Programming (OOP)
 
-<h2>Technical questions</h2>
+### Frontend
 
-Please answer the following questions in a markdown file called <code>Answers to technical questions.md</code>
-<ul>
-  <li>How long did you spend on the coding test? What would you add to your solution if you had more time? If you didn't spend much time on the coding test then use this as an opportunity to explain what you would add.</li>
-	<li>How would you track down a performance issue in production? Have you ever had to do this?</li>
-	<li>Please describe yourself using JSON.</li>
-</ul>
+* HTML5
+* CSS3
+* Bootstrap 5
+* jQuery
+* Slick Slider
+
+---
+
+## Features
+
+### Admin Panel
+
+#### Categories
+
+* Create Category
+* Update Category
+* Delete Category
+* View Category List
+
+#### Slides
+
+* Create Slide
+* Update Slide
+* Delete Slide
+* Upload Images
+* Assign Slides to Categories
+
+### Frontend
+
+#### Desktop View
+
+* Left column contains category tabs
+* Center column contains content slider
+* Right column contains synchronized image
+* Clicking a tab loads its corresponding slider
+* Slider navigation updates image automatically
+
+#### Mobile View
+
+* Tabs behave as accordion items
+* Active slider appears below selected tab
+* Images are displayed as slide backgrounds
+
+---
+
+## Project Structure
+
+slider-project/
+
+├── admin/
+│	├──asset ├──js ├── admin-slider.js
+
+│ ├── admin-ajax.php
+
+│ ├── categories.php
+
+│ ├── category-form.php
+
+│ ├── slide-form.php
+
+│ └── slides.php
+
+
+├── uploads/
+
+│
+
+├── assets/
+
+│ ├── css/
+	  ├── slider.css
+
+│ ├── js/
+	├── slider.js
+
+│ └── images/
+
+│
+├── config.php
+├── DB_Connection.php
+├── slider.php
+├── index.php
+
+└── README.md
+
+---
+
+## Database Setup
+
+### Create Database
+
+```sql
+CREATE DATABASE wpoets_assignment;
+```
+
+### Import Schema
+
+```sql
+CREATE TABLE IF NOT EXISTS categories (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    image VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS slides (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    category_id INT NOT NULL,
+    title VARCHAR(255),
+    tag VARCHAR(255),
+    image VARCHAR(255),
+    link VARCHAR(255),
+    sort_order INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(category_id)
+    REFERENCES categories(id)
+);
+```
+
+---
+
+## Installation
+
+### Clone Repository
+
+```bash
+git clone https://github.com/sushmabiradar93/full-stack-test.git
+```
+
+### Configure Database
+
+Update database credentials inside:
+
+```php
+config.php
+```
+
+Example:
+
+```php
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'wpoets_assignment');
+define('DB_USERMAME', 'root');
+define('DB_PASSWORD', '');
+```
+
+### Run Project
+
+Place project inside your local server:
+
+For XAMPP:
+
+```text
+htdocs/slider-project/
+```
+
+Open:
+
+```text
+http://localhost/slider-project
+```
+
+---
+
+## Security Considerations
+
+Implemented:
+
+* PDO Prepared Statements
+* Output Escaping using htmlspecialchars()
+* File Upload Validation
+
+Potential Improvements:
+
+* CSRF Protection
+* Authentication System
+* Role Based Permissions
+* Image Type Validation
+* Rate Limiting
+
+---
+
+## Performance Considerations
+
+* Optimized SQL Queries
+* Lazy Loaded Slider Images
+* Single Slick Initialization
+* Reusable CRUD Class
+* Efficient DOM Manipulation
+
+---
+
+## Assumptions
+
+* Categories represent tabs.
+* Slides belong to a category.
+* One category can have multiple slides.
+* Images are uploaded locally.
+
+---
+
+## Future Improvements
+
+Given additional time I would:
+
+* Create menu, header, footer and dashboard page
+* Add server-side validation and CSRF protection.
+* Optimize image loading with lazy loading.
+* Add drag-and-drop sorting for tabs and slides.
+* Add datatables for backend for easy search and pagination, with responsive design
+* preview image in edit slide
+* implement sort order
+* Add login, register for admin panel
+---
+
+## Author
+
+Name: Sushma Biradar
+
+Email: [sushmabiradar93@gmail.com]
