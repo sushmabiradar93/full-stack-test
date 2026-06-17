@@ -1,6 +1,3 @@
 /uploads/*
-<<<<<<< HEAD
 !/uploads/.gitkeep
-=======
-!/uploads/.gitkeep
->>>>>>> 6061b821767616086ca3ca97e2cde2bcfa40ca1e
+
